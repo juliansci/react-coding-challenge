@@ -9,4 +9,4 @@ It is a project to solve the challenge described on the file `CHALLENGE.md`
    2. `context-implementation`: Store the app state using React Context.
    3. `redux-implementation`: Store the app state usin Redux.
 4. The application was tested using react-testing-library
-5. To fetch the data I used `fetch` API, but it would be good to change it to `react-query`.
+5. To fetch the data I created the `useFetch` hook, but it would be good refactoring it to use `react-query`.

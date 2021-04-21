@@ -27,11 +27,23 @@ test('Show posts after request finishes successfully', async () => {
   expect(postsItems.length).toBeGreaterThan(0);
 });
 
-test('Show error message after request fails', async () => {
-  const testErrorMessage = 'Internal Server Error';
+test('Show error message after request fails with status code 500', async () => {
+  const testErrorMessage = 'There is a big error here';
   server.use(
     rest.get(urlApiPost, async (req, res, ctx) => {
       return res(ctx.status(500), ctx.json({ message: testErrorMessage }));
+    })
+  );
+  render(<App />);
+  await waitForElementToBeRemoved(() => screen.getByText(/loading posts\.\.\./i));
+  expect(screen.getByRole('alert')).toHaveTextContent(testErrorMessage);
+});
+
+test('Show error message after request fails with status code 409', async () => {
+  const testErrorMessage = 'Something was wrong';
+  server.use(
+    rest.get(urlApiPost, async (req, res, ctx) => {
+      return res(ctx.status(409), ctx.json({ message: testErrorMessage }));
     })
   );
   render(<App />);

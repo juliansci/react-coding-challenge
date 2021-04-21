@@ -1,22 +1,31 @@
 import './index.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import CommentsList from 'components/CommentsList';
 import { getCommentsByPostId } from 'api/post.api';
+import { fetchStatuses, useFetch } from 'hooks/useFetch';
 
 function PostItem({ post }) {
   const [viewComments, setViewComments] = useState(false);
-  const [comments, setComments] = useState([]);
-  const [isLoadingComments, setIsLoadingComments] = useState(true);
+  const getCommentsByPostIdCallback = useCallback(() => getCommentsByPostId(post.id), [post.id]);
+  const makeFetch = useCallback(() => !!viewComments, [viewComments]);
+  const { status, responseData: comments, errorMessage } = useFetch(getCommentsByPostIdCallback, makeFetch);
 
-  function handleViewComments() {
-    if (!viewComments) {
-      getCommentsByPostId(post.id).then((comments) => {
-        setComments(comments);
-        setIsLoadingComments(false);
-      });
+  function renderComments() {
+    if (!viewComments) return null;
+    if (status === fetchStatuses.PENDING) {
+      return <div>Loading Comments... </div>;
     }
-    setViewComments(!viewComments);
+    if (status === fetchStatuses.REJECTED) {
+      return (
+        <div role="alert" style={{ color: 'red' }}>
+          {errorMessage}
+        </div>
+      );
+    }
+    if (status === fetchStatuses.RESOLVED) {
+      return <CommentsList comments={comments} />;
+    }
   }
 
   return (
@@ -29,10 +38,10 @@ function PostItem({ post }) {
         <span>User {post.userId}</span>
       </div>
       <div className="description">{post.body}</div>
-      <button type="button" className="view-comments-button" onClick={handleViewComments}>
+      <button type="button" className="view-comments-button" onClick={() => setViewComments(!viewComments)}>
         {viewComments ? <>Hide Comments</> : <>View Comments</>}
       </button>
-      {viewComments ? isLoadingComments ? <div>Loading Comments...</div> : <CommentsList comments={comments} /> : null}
+      {renderComments()}
     </div>
   );
 }
@@ -42,7 +51,7 @@ PostItem.propTypes = {
     title: PropTypes.string.isRequired,
     userId: PropTypes.number.isRequired,
     body: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
 };
 
 export default PostItem;

@@ -2,25 +2,18 @@ export const urlApiPost = 'https://jsonplaceholder.typicode.com/posts';
 
 export async function getPosts() {
   try {
-    const response = await fetch(urlApiPost);
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
-    return response.json();
+    return fetch(urlApiPost);
   } catch (error) {
-    const errorMessage = error.message || 'Something wrong has happened. Try later.';
-    throw errorMessage;
+    console.log(error);
+    throw error;
   }
 }
 
 export async function getCommentsByPostId(postId) {
   try {
-    const response = await fetch(`${urlApiPost}/${postId}/comments`);
-    if (response.ok) {
-      return response.json();
-    }
-    return null;
+    return fetch(`${urlApiPost}/${postId}/comments`);
   } catch (error) {
-    console.error(error);
+    console.log(error);
+    throw error;
   }
 }
