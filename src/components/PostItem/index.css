@@ -1,0 +1,43 @@
+.PostItem {
+  margin: 10px 0px;
+  padding: 10px 0px;
+  border-bottom: 1px dotted black;
+}
+
+.PostItem .title {
+  font-weight: bolder;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.PostItem .creator-info {
+  display: flex;
+  align-items: center;
+}
+
+.PostItem .creator-info span {
+  margin-left: 10px;
+}
+.PostItem .creator-info .image-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.PostItem .creator-info img {
+  width: 100%;
+}
+.PostItem .description {
+  text-align: justify;
+  margin-top: 5px;
+}
+
+.PostItem .view-comments-button {
+  background-color: blue;
+  padding: 10px;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  margin-top: 5px;
+}
