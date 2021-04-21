@@ -1,14 +1,15 @@
-const urlApiPost = 'https://jsonplaceholder.typicode.com/posts';
+export const urlApiPost = 'https://jsonplaceholder.typicode.com/posts';
 
 export async function getPosts() {
   try {
     const response = await fetch(urlApiPost);
-    if (response.ok) {
-      return response.json();
+    if (!response.ok) {
+      throw Error(response.statusText);
     }
-    return null;
+    return response.json();
   } catch (error) {
-    console.error(error);
+    const errorMessage = error.message || 'Something wrong has happened. Try later.';
+    throw errorMessage;
   }
 }
 

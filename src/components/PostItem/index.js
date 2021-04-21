@@ -20,7 +20,7 @@ function PostItem({ post }) {
   }
 
   return (
-    <div className="PostItem">
+    <div className="PostItem" data-testid="PostItem">
       <div className="title">{post.title}</div>
       <div className="creator-info">
         <div className="image-container">
