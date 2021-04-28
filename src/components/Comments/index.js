@@ -2,13 +2,13 @@ import CommentItem from 'components/CommentItem';
 import CommentBox from 'components/CommentBox';
 import styles from './Comments.module.scss';
 
-function Comments({ comments }) {
+function Comments({ comments, onAddComment }) {
   return (
     <div className={styles.container}>
       <h2>Comments</h2>
-      <CommentBox />
+      <CommentBox onAddComment={onAddComment} />
       {comments &&
-        comments.map((comment) => {
+        [...comments].reverse().map((comment) => {
           return <CommentItem key={comment.id} comment={comment} />;
         })}
     </div>

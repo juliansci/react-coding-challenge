@@ -1,7 +1,7 @@
 import Comments from 'components/Comments';
 import styles from './PostDetail.module.scss';
 
-function PostDetail({ post }) {
+function PostDetail({ post, onAddComment }) {
   return (
     <div className={styles.container} data-testid="PostItem">
       <div className={styles.title}>{post.title}</div>
@@ -12,7 +12,7 @@ function PostDetail({ post }) {
         <span>User {post.userId}</span>
       </div>
       <div className={styles.description}>{post.body}</div>
-      <Comments comments={post.comments} />
+      <Comments comments={post.comments} onAddComment={onAddComment} />
     </div>
   );
 }
