@@ -1,7 +1,7 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { setupServer } from 'msw/node';
-import App from 'components/App';
-import { handlers } from 'tests/server-handlers';
+import App from 'pages/App/App';
+import { handlers } from '__tests__/server-handlers';
 import { urlApiPost } from 'api/post.api';
 import { rest } from 'msw';
 

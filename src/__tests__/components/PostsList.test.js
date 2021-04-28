@@ -1,6 +1,6 @@
 import { screen, render } from '@testing-library/react';
-import PostsList from 'components/PostsList';
-import { posts } from 'tests/test-data';
+import PostsList from 'pages/Posts';
+import { posts } from '__tests__/test-data';
 
 test('render with empty posts array', () => {
   render(<PostsList posts={[]} />);

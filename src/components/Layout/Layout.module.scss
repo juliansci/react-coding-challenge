@@ -1,0 +1,33 @@
+@import 'styles/colors.module.scss';
+
+.container header {
+  height: 10vh;
+  background-color: $darkBlue;
+  color: white;
+  display: flex;
+  align-items: center;
+  img {
+    height: 70%;
+    margin-left: 1rem;
+  }
+  span {
+    font-size: 1.3rem;
+    margin: 1rem;
+  }
+}
+
+.container footer {
+  height: 5vh;
+  background-color: $darkBlue;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 2rem;
+}
+
+.content {
+  width: 60vw;
+  min-height: 85vh;
+  margin: auto;
+}
